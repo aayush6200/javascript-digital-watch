@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Myclock</title>
+</head>
+<body>
+    <Card class="card bg-secondary " style=" display: flex; padding: 50px; width:400px; height:200px; margin-left: 400px; margin-top:20px; display: flex; flex-direction: row; justify-content: space-between;">
+        <Card class="card-items-hr bg-secondary" style="width:90px; height:50px;">
+            <h1 id='hrs-elem' style="margin-left:15px;">10</h1>
+            <button  onclick=hourControlUp() class="btn btn-secondary active" data-toggle="button" aria-pressed="true" autocomplete="off"> <i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick=hourControlDown() class="btn btn-secondary active" data-toggle="button" aria-pressed="true" autocomplete="off"> <i class="fa-solid fa-arrow-down"></i></button>
+        </Card>
+        <Card class="card-items-min bg">
+            <h1 id="min-elem" style="margin-left:15px;">02</h1>
+            <button onclick=minuteControlUp() class="btn btn-secondary active " data-toggle="button" aria-pressed="true" autocomplete="off"> <i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick=minuteControlDown() class="btn btn-secondary active" data-toggle="button" aria-pressed="true" autocomplete="off"> <i class="fa-solid fa-arrow-down"></i></button>
+        </Card>
+        <Card class="card-items-sec">
+            <h1 id="sec-elem" style="margin-left:15px;">30</h1>
+            <button onclick=secondControlUp() class="btn btn-secondary active"  data-toggle="button" aria-pressed="true" autocomplete="off"> <i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick=secondControlDown() class="btn btn-secondary active" data-toggle="button" aria-pressed="true" autocomplete="off"> <i class="fa-solid fa-arrow-down"></i></button>
+        </Card>
+
+        
+    </Card>
+    <div class="my-buttons"  style="margin-left:500px;" >
+    <button onclick=myWatch() class="btn btn-primary active" data-toggle="button" aria-pressed="true" autocomplete="off">
+        Set Time
+      </button>
+      <button onclick=myStop() class="btn btn-primary active" data-toggle="button" aria-pressed="true" autocomplete="off" >
+        Stop
+      </button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="digital.js"></script>
+    <script src="watchfunction.js"></script>
+</body>
+</html>
