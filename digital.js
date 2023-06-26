@@ -1,109 +1,75 @@
-let clockHours= Number(document.getElementById('hrs-elem').innerText)
-let clockMinutes= Number(document.getElementById('min-elem').innerText)
-let clockSeconds= Number(document.getElementById('sec-elem').innerText)
-let k=0
+// Initialize clock variables
+let clockHours = 0;
+let clockMinutes = 0;
+let clockSeconds = 0;
+let intervalId = 0;
 
-const myStop=()=>{
-    clearInterval(k)
-}
+// Stop the clock
+const myStop = () => {
+  clearInterval(intervalId);
+};
 
-const hourControlUp=()=>{
-    clockHours=parseInt(clockHours)+Number(1)
-    
-    if (clockHours===24){
-        clockHours='00'
+// Update the clock element with the given value
+const updateClockElement = (elementId, value) => {
+  const clockElement = document.getElementById(elementId);
+  clockElement.innerText = value < 10 ? `0${value}` : value;
+};
+
+// Increment the hour value and update the clock element
+const hourControlUp = () => {
+  clockHours = (clockHours + 1) % 24;
+  updateClockElement('hrs-elem', clockHours);
+};
+
+// Decrement the hour value and update the clock element
+const hourControlDown = () => {
+  clockHours = (clockHours - 1 + 24) % 24;
+  updateClockElement('hrs-elem', clockHours);
+};
+
+// Increment the minute value and update the clock element
+const minuteControlUp = () => {
+  clockMinutes = (clockMinutes + 1) % 60;
+  if (clockMinutes === 0) {
+    hourControlUp();
+  }
+  updateClockElement('min-elem', clockMinutes);
+};
+
+// Decrement the minute value and update the clock element
+const minuteControlDown = () => {
+  clockMinutes = (clockMinutes - 1 + 60) % 60;
+  if (clockMinutes === 59) {
+    hourControlDown();
+  }
+  updateClockElement('min-elem', clockMinutes);
+};
+
+// Increment the second value and update the clock element
+const secondControlUp = () => {
+  clockSeconds = (clockSeconds + 1) % 60;
+  if (clockSeconds === 0) {
+    minuteControlUp();
+  }
+  updateClockElement('sec-elem', clockSeconds);
+};
+
+// Decrement the second value and update the clock element
+const secondControlDown = () => {
+  clockSeconds = (clockSeconds - 1 + 60) % 60;
+  if (clockSeconds === 59) {
+    minuteControlDown();
+  }
+  updateClockElement('sec-elem', clockSeconds);
+};
+
+// Start the clock by incrementing the second value every second
+const myWatch = () => {
+  intervalId = setInterval(() => {
+    clockSeconds = (clockSeconds + 1) % 60;
+    if (clockSeconds === 0) {
+      minuteControlUp();
     }
-    else if (clockHours>0 && clockHours<10){
-        clockHours='0'+clockHours
-    }
-    document.getElementById('hrs-elem').innerText=clockHours
-}
-const hourControlDown=()=>{
-    clockHours=parseInt(clockHours)-Number(1)
-    
-    if (clockHours===-1){
-        clockHours='23'
-    }
-    else if (clockHours>=0 && clockHours<10){
-        clockHours='0'+clockHours
-    }
-    document.getElementById('hrs-elem').innerText=clockHours
-
-}
-
-const minuteControlUp=()=>{
-    clockMinutes=parseInt(clockMinutes)+Number(1)
-    
-    if (clockMinutes===60){
-        hourControlUp()
-        clockMinutes='00'
-    }
-    else if (clockMinutes>=0 && clockMinutes<10){
-        clockMinutes='0'+clockMinutes
-    }
-    document.getElementById('min-elem').innerText=clockMinutes
-
-}
-
-const minuteControlDown=()=>{
-    clockMinutes=parseInt(clockMinutes)-Number(1)
-    
-    if (clockMinutes===-1){
-        clockMinutes='59'
-    }
-    else if (clockMinutes>=0 && clockMinutes<10){
-        clockMinutes='0'+clockMinutes
-    }
-    document.getElementById('min-elem').innerText=clockMinutes
-
-}
-
-const secondControlUp=()=>{
-    clockSeconds=parseInt(clockSeconds)+Number(1)
-    
-    if (clockSeconds===60){
-        clockSeconds='00'
-    }
-    else if (clockSeconds>=0 && clockSeconds<10){
-        clockSeconds='0'+clockSeconds
-    }
-    document.getElementById('sec-elem').innerText=clockSeconds
-
-
-}
-const secondControlDown=()=>{
-    clockSeconds=parseInt(clockMinutes)-Number(1)
-    
-    if (clockSeconds===-1){
-        clockSeconds='59'
-    }
-    else if (clockSeconds>=0 && clockSeconds<10){
-        clockSeconds='0'+clockSeconds
-    }
-    document.getElementById('sec-elem').innerText=clockSeconds
-
-}
-
-const myWatch=()=>{
-    k=setInterval(function aayush (){
-        console.log('aayush')
-        clockSeconds=parseInt(clockSeconds)+Number(1)
-    
-    if (clockSeconds===61){
-        minuteControlUp()
-        clockSeconds='01'
-    }
-    else if (clockSeconds>=0 && clockSeconds<10){
-        clockSeconds='0'+clockSeconds
-    }
-    document.getElementById('sec-elem').innerText=clockSeconds
-
-    },1000)
-}
-
-
-
-
-
-
-
+    updateClockElement('sec-elem', clockSeconds);
+  }, 1000);
+};
